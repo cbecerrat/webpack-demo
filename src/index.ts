@@ -1,10 +1,20 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import icon from './assets/webpack-icon.png';
 
-const component = function (): HTMLDivElement {
-    const element = document.createElement('div') as HTMLDivElement;
+const writeHello = function (): void {
+    const element = document.querySelector('#placeholder') as HTMLDivElement;
     element.innerHTML = ['Hello', 'webpack'].join(' ');
-    return element;
 }
 
-document.body.appendChild(component());
+const addImage = function (): void {
+    const element = document.querySelector('#image') as HTMLDivElement;
+
+    const myIcon = new Image();
+    myIcon.src = icon;
+
+    element.appendChild(myIcon);
+}
+
+writeHello();
+addImage();
