@@ -73,7 +73,7 @@ module.exports = {
     },
     output: {
         // filename: 'bundle.js',
-        filename: '[name].js',
+        filename: '[name].[chunkhash].js',
         path: dist,
     },
     optimization: {
