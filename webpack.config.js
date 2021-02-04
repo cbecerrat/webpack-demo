@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const fs = require('fs');
+const webpack = require('webpack');
 
 const DEBUG = false;
 
@@ -74,9 +75,25 @@ module.exports = {
         filename: '[name].js',
         path: dist,
     },
+    optimization: {
+        runtimeChunk: 'single',
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: "vendors",
+                    chunks: "all"
+                }
+            }
+        }
+    },
     plugins: [
         new CleanWebpackPlugin(),
-        ...templates
+        ...templates,
+        new webpack.DefinePlugin({
+            "__VUE_OPTIONS_API__": true,
+            "__VUE_PROD_DEVTOOLS__": false,
+        })
     ],
     devServer: {
         contentBase: dist,
