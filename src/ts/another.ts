@@ -1,6 +1,6 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import icon from './assets/webpack-icon.png';
+import icon from '../assets/webpack-icon.png';
 
 const writeHello = function (): void {
     const element = document.querySelector('#placeholder') as HTMLDivElement;

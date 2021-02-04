@@ -6,7 +6,8 @@ const webpack = require('webpack');
 
 const DEBUG = false;
 
-const src = path.join(__dirname, 'src');
+const srcPages = path.join(__dirname, 'src/pages');
+const srcTS = path.join(__dirname, 'src/ts');
 const dist = path.join(__dirname, 'dist');
 
 const templates = [];
@@ -14,7 +15,7 @@ const templates = [];
 const HTML_EXTENSION = '.html';
 const EMPTY_STRING = '';
 
-const files = fs.readdirSync(src);
+const files = fs.readdirSync(srcPages);
 const htmlFiles = files.filter(el => path.extname(el) === HTML_EXTENSION);
 
 const entry = {};
@@ -22,19 +23,19 @@ const entry = {};
 for (const file of htmlFiles) {
     if (DEBUG) {
         console.log(`Configuring: ${file}`);
-        console.log(path.join(src, file));
+        console.log(path.join(srcPages, file));
     }
 
     const chunk = file.replace(HTML_EXTENSION, EMPTY_STRING);
 
     const template = new HtmlWebpackPlugin({
-        template: path.resolve(src, file),
+        template: path.resolve(srcPages, file),
         inject: true,
         chunks: [chunk],
         filename: file
     });
 
-    entry[chunk] = path.join(src, `${chunk}.ts`);
+    entry[chunk] = path.join(srcTS, `${chunk}.ts`);
 
     templates.push(template);
 }
